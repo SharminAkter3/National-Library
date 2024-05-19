@@ -56,13 +56,15 @@
         onmouseout="this.style.backgroundColor='#9BBEC8'; this.style.color='#164863';"
         >Profile</a
       >
-      <a
-        href="{% url 'logout' %}"
-        class="mx-2 inline-block font-medium text-sm px-4 py-2 leading-none rounded border-white hover:border-transparent mt-4 lg:mt-0" style="background-color:#9BBEC8; color: #164863;"
+
+      <div class=''>
+        <form method="post" action="{% url 'logout' %}" class=''>
+          {% csrf_token %}
+          <button type="submit" class="mx-2 inline-block font-medium text-sm px-4 py-2 leading-none rounded border-white hover:border-transparent mt-4 lg:mt-0" style="background-color:#9BBEC8; color: #164863;"
         onmouseover="this.style.backgroundColor='#427D9D'; this.style.color='#DDF2FD';"
-        onmouseout="this.style.backgroundColor='#9BBEC8'; this.style.color='#164863';"
-        >Logout</a
-      >
+        onmouseout="this.style.backgroundColor='#9BBEC8'; this.style.color='#164863';">Logout</button>
+        </form>
+      </div>
     </div>
     {% else %}
     <div class="text-md lg:flex-grow"></div>
