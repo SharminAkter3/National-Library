@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import dj_database_url
 
 import environ
 
@@ -84,16 +85,26 @@ WSGI_APPLICATION = "library_management.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": env("DB_NAME"),
+#         "USER": env("DB_USER"),
+#         "PASSWORD": env("DB_PASSWORD"),
+#         "HOST": env("DB_HOST"),
+#         "PORT": env("DB_PORT"),
+#     }
+# }
+
+
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": env("DB_NAME"),
-        "USER": env("DB_USER"),
-        "PASSWORD": env("DB_PASSWORD"),
-        "HOST": env("DB_HOST"),
-        "PORT": env("DB_PORT"),
-    }
+    "default": dj_database_url.config(
+        # Replace this value with your local database's connection string.
+        default="postgres://national_library_user:OqIQhix2ZMqGuMXGIvTzPN66QnuITgns@dpg-cp50nr0cmk4c73eqjg2g-a.oregon-postgres.render.com/national_library",
+        # conn_max_age=600,
+    )
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
