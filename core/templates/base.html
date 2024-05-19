@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    {% block title %} {% endblock %}
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/tailwindcss@2.0.1/dist/tailwind.min.css"
+    />
+
+    <style>
+      body {
+        background-color: #DDF2FD;
+      }
+      nav{
+        background-color: #164863;
+      }
+      footer{
+        background-color: #164863;
+      }
+    </style>
+  </head>
+  <body>
+    {% include 'navbar.html' %}
+    <div class="lg:container lg:mx-auto">{% block body %}
+     {% endblock %}</div>
+     {% include 'footer.html' %}
+  </body>
+</html>

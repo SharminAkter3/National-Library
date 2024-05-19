@@ -1,0 +1,89 @@
+<nav class="flex items-center justify-between flex-wrap p-6 px-10">
+  <div class="flex items-center flex-shrink-0 text-white mr-6">
+    <span class="font-bold text-3xl tracking-tight text-blue-900" style="color: #DDF2FD;"
+      ><a href="/">National Library</a></span
+    >
+  </div>
+  <div class="block lg:hidden">
+    <button
+      class="flex items-center px-3 py-2 border rounded text-white border-white-400 hover:text-white hover:border-white"
+    >
+      <svg
+        class="fill-current h-3 w-3"
+        viewBox="0 0 20 20"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <title>Menu</title>
+        <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+      </svg>
+    </button>
+  </div>
+  <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto px-10 ">
+      <a
+        href="/"
+        class="font-bold block mt-4 lg:inline-block lg:mt-0 mr-4" style="color: #DDF2FD;" onmouseover="this.style.color='#9BBEC8';" onmouseout="this.style.color='#DDF2FD';" 
+      >
+        Home
+      </a>
+      <a
+        href="{% url 'about' %}"
+        class="font-bold block mt-4 lg:inline-block lg:mt-0 mr-4" style="color: #DDF2FD;" onmouseover="this.style.color='#9BBEC8';" onmouseout="this.style.color='#DDF2FD';"
+      >
+        About Us
+      </a>
+      <a
+        href="{% url 'contact' %}"
+        class="font-bold block mt-4 lg:inline-block lg:mt-0 mr-4" style="color: #DDF2FD;" onmouseover="this.style.color='#9BBEC8';" onmouseout="this.style.color='#DDF2FD';"
+      >
+        Contact Us
+      </a>
+      
+    {% if request.user.is_authenticated %}
+    <div class="text-md lg:flex-grow mx-5 px-5">
+      {% comment %} <a
+        href="{% url 'deposite_money' %}"
+        class="block mt-4 lg:inline-block lg:mt-0 text-blue-900 hover:text-red-900 hover:font-black mr-4"
+      >
+        Deposit
+      </a> {% endcomment %}
+     
+    </div>
+    <div class="flex w-auto">
+      <a
+        href="{% url 'transaction_report' %}"
+        class="mx-2 inline-block font-medium text-sm px-4 py-2 leading-none rounded border-white hover:border-transparent mt-4 lg:mt-0" style="background-color:#9BBEC8; color: #164863;"
+        onmouseover="this.style.backgroundColor='#427D9D'; this.style.color='#DDF2FD';"
+        onmouseout="this.style.backgroundColor='#9BBEC8'; this.style.color='#164863';"
+        >Profile</a
+      >
+      <a
+        href="{% url 'logout' %}"
+        class="mx-2 inline-block font-medium text-sm px-4 py-2 leading-none rounded border-white hover:border-transparent mt-4 lg:mt-0" style="background-color:#9BBEC8; color: #164863;"
+        onmouseover="this.style.backgroundColor='#427D9D'; this.style.color='#DDF2FD';"
+        onmouseout="this.style.backgroundColor='#9BBEC8'; this.style.color='#164863';"
+        >Logout</a
+      >
+    </div>
+    {% else %}
+    <div class="text-md lg:flex-grow"></div>
+    <div>
+      <a
+        href="{% url 'login' %}"
+        class="mr-2 inline-block font-medium text-sm px-5 py-2 leading-none rounded border-white hover:border-transparent mt-4 lg:mt-0" style="background-color:#9BBEC8; color: #164863;"
+        onmouseover="this.style.backgroundColor='#427D9D'; this.style.color='#DDF2FD';"
+        onmouseout="this.style.backgroundColor='#9BBEC8'; this.style.color='#164863';"
+        >Login</a
+      >
+    </div>
+    <div>
+      <a
+        href="{% url 'register' %}"
+        class="inline-block font-medium text-sm px-5 py-2 leading-none rounded border-white hover:border-transparent mt-4 lg:mt-0" style="background-color:#9BBEC8; color: #164863;"
+        onmouseover="this.style.backgroundColor='#427D9D'; this.style.color='#DDF2FD';"
+        onmouseout="this.style.backgroundColor='#9BBEC8'; this.style.color='#164863';"
+        >Register</a
+      >
+    </div>
+    {% endif %}
+  </div>
+</nav>

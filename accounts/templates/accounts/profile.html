@@ -1,0 +1,157 @@
+{% extends 'base.html' %} {% load static %} {% load humanize %}
+<br />
+{% block head_title %}National Library{% endblock %} {% block body %}
+<br />
+{% if borrowed_book_details %}
+<div class="p-3">
+  <div class="flex flex-between w-full p-5 my-4">
+    <div class="w-full md:w-1/2">
+      <img
+        src="{{ borrowed_book_details.image_url }}"
+        class="w-full h-auto"
+        alt="image"
+        style="height: 500px; width: 500px"
+      />
+    </div>
+    <div class="w-full md:w-1/2 -mx-3">
+      <div class="bg-white p-4 -mx-5 rounded">
+        <h5 class="text-xl font-bold mt-2">
+          <a href="#" class="text-indigo-800"
+            >{{ borrowed_book_details.name }}</a
+          >
+        </h5>
+        <p><b>Borrowing Price:</b> $ {{ borrowed_book_details.price }}</p>
+        <p><b>Category :</b> {{ borrowed_book_details.category }}</p>
+        <p>{{ borrowed_book_details.description }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+<div class="text-center m-2 ">
+  <a
+    href=""
+    class="font-bold text-3xl text-center mb-5 pb-5" style="color: #164863;"
+  >
+    Your Profile Information
+  </a>
+
+  <div class='mx-20 p-10 mt-4 mb-20 rounded-lg overflow-hidden shadow-lg' style="color: #164863; background-color: #9BBEC8;">
+  <div class="flex flex-col lg:flex-row items-center justify-between w-full">
+    <div class='w-full lg:w-1/2 flex flex-col items-center lg:items-start'>
+      <img class='w-2/4 lg:w-3/4 mb-3' src="{% static 'user3.webp' %}" alt="">
+      <button
+      class="w-2/4 lg:w-3/4 px-3 m-auto lg:m-0 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline inline-block"
+            style="background-color:#164863; color: #DDF2FD;"
+            onmouseover="this.style.backgroundColor='#DDF2FD'; this.style.color='#164863';"
+            onmouseout="this.style.backgroundColor='#164863'; this.style.color='#DDF2FD';"
+      >
+        <a href="{% url 'password_change' %}">
+          Change Password
+        </a>
+      </button>
+    </div>
+    <div class='w-full lg:w-1/2 mt-5 lg:mt-0'>
+      <p class="text-lg text-left pb-5">
+        <b>Account No :</b> {{ request.user.account.account_no }}
+      </p>
+      <p class="text-lg text-left pb-5">
+        <b>Name :</b> {{ request.user.account.user.first_name}} {{ request.user.account.user.last_name}}
+      </p>
+      <p class="text-lg text-left pb-5">
+        <b>Email :</b> {{ request.user.account.user.email}}
+      </p>
+      <p class="text-lg text-left pb-5">
+        <b>Birth Date :</b> {{ request.user.account.birth_date}}
+      </p>
+      <p class="text-lg text-left pb-5">
+        <b>Address :</b> {{ request.user.address.street_address}}, {{ request.user.address.country}}
+      </p>
+    </div>
+  </div>
+  </div>
+
+
+</div>
+
+<div class="">
+  <div class="mx-20 my-10 py-3 px-4 rounded-xl shadow-md"  style="color: #164863; background-color: #9BBEC8;">
+    <h1 class="font-bold text-3xl text-center pb-5 pt-2">
+      Borrowing Report Overview
+    </h1>
+    <hr />
+    <form method="get" action="{% url 'transaction_report' %}">
+      <div class="flex justify-center ml-40">
+        <div
+          class="mt-10 pl-3 pr-2 bg-white border rounded-md border-gray-500 flex justify-between items-center relative w-4/12 mx-2"
+        >
+          <label for="start_date">From:</label>
+          <input
+            class="appearance-none w-full outline-none focus:outline-none active:outline-none"
+            type="date"
+            id="start_date"
+            name="start_date"
+          />
+        </div>
+
+        <div
+          class="mt-10 pl-3 pr-2 bg-white border rounded-md border-gray-500 flex justify-between items-center relative w-4/12"
+        >
+          <label for="end_date">To:</label>
+          <input
+            class="appearance-none w-full outline-none focus:outline-none active:outline-none"
+            type="date"
+            id="end_date"
+            name="end_date"
+          />
+        </div>
+        <div
+          class="mt-10 pl-3 pr-2 flex justify-between items-center relative w-4/12"
+        >
+          <button
+            class="font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline inline-block"
+            style="background-color:#164863; color: #DDF2FD;"
+            onmouseover="this.style.backgroundColor='#DDF2FD'; this.style.color='#164863';"
+            onmouseout="this.style.backgroundColor='#164863'; this.style.color='#DDF2FD';"
+            type="submit"
+          >
+            Filter
+          </button>
+        </div>
+      </div>
+    </form>
+    <table
+      class="table-auto mx-auto w-full px-5 rounded-xl mt-8 border dark:border-neutral-500"
+    >
+      <thead class="bg-blue-900 text-white text-left">
+        <tr
+          class=" rounded-md py-2 px-4 text-white font-bold" style="color: #164863; background-color: #9BBEC8;"
+        >
+          <th class="px-4 py-2">Account No</th>
+          <th class="px-4 py-2">Date & Time</th>
+          <th class="px-4 py-2">Book Name</th>
+          <th class="px-4 py-2">Borrowing Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for transaction in report_list %}
+        <tr class="border-b dark:border-neutral-500">
+          <td class="px-4 py-2">{{ request.user.account.account_no }}</td>
+          <td class="px-4 py-2">
+            {{ transaction.timestamp|date:"F d, Y h:i A" }}
+          </td>
+          <td class="px-4 py-2">{{ transaction.book.name }}</td>
+
+           <td class="px-4 py-2">
+            {{ transaction.amount|floatformat:2|intcomma }}Tk
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table> 
+
+  </div>
+</div>
+
+{% endblock %}

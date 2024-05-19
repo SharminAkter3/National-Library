@@ -1,0 +1,95 @@
+/* about section */
+
+/* Animation for the image */
+.about-image {
+    transition: transform 0.3s ease;
+}
+
+/* Scale up the image on hover */
+.about-image:hover {
+    transform: scale(1.05);
+}
+
+/* Animation for text content */
+.about-content {
+    transition: opacity 0.3s ease;
+}
+
+/* Fade in the text content on hover */
+.about-image:hover+.about-content {
+    opacity: 1;
+}
+
+
+/* 
+What can do section */
+/* Animation for the icons */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Apply animation to each icon with a different delay */
+.icon {
+    opacity: 0;
+    /* Initially hide the icons */
+    animation: fadeIn 0.5s ease forwards;
+}
+
+/* Delay the animation for each icon */
+.icon:nth-child(1) {
+    animation-delay: 0.2s;
+}
+
+.icon:nth-child(2) {
+    animation-delay: 0.6s;
+}
+
+.icon:nth-child(3) {
+    animation-delay: 0.8s;
+}
+
+/* Animation for the card */
+.card {
+    transition: transform 0.3s ease;
+}
+
+/* Scale up the card on hover */
+.card:hover {
+    transform: scale(1.05);
+}
+
+/* Show icons when card is hovered */
+.card:hover .icon {
+    animation: fadeIn 0.5s ease forwards;
+}
+
+
+
+/* FAQ Section */
+
+/* Animation for details */
+details {
+    transition: transform 0.3s ease;
+}
+
+/* Scale up the details element on hover */
+details:hover {
+    transform: scale(1.02);
+}
+
+/* Animation for summary */
+summary {
+    transition: background-color 0.3s ease;
+}
+
+summary:hover {
+    background-color: #f3f4f6;
+}

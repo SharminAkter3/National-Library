@@ -1,0 +1,119 @@
+{% extends 'base.html' %} {% load static %} {% block body %}
+<br />
+
+<div class="w-full md:w-2/3 lg:w-1/2 m-auto mt-5 mb-10">
+    <div class="py-2 px-3 sm:px-0 rounded-xl mt-10" style="color: #164863; background-color: #9BBEC8;">
+        <h1 class="font-bold text-3xl text-center pt-5">Contact Us</h1>
+
+        <div class="w-full mt-5">
+            <form action="#" method="post" class="px-8 pt-6 mb-10">
+                {% csrf_token %}
+
+                {% for hidden_field in form.hidden_fields %}
+                    {{ hidden_field.errors }}
+                    {{ hidden_field }}<br />
+                {% endfor %}
+
+                <div class="mb-4">
+                    <label class="block text-sm font-bold mb-2" for="{{ form.name.id_for_label }}">
+                        Name
+                    </label>
+                    <input class="shadow appearance-none border border-gray-500 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                           name="{{ form.name.name }}"
+                           id="{{ form.name.id_for_label }}"
+                           type="{{ form.name.widget_type }}"
+                           placeholder="Your Name"
+                    />
+                    {% if form.name.errors %}
+                        {% for error in form.name.errors %}
+                            <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-sm font-bold mb-2" for="{{ form.email.id_for_label }}">
+                        Email
+                    </label>
+                    <input class="shadow appearance-none border border-gray-500 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                           name="{{ form.email.name }}"
+                           id="{{ form.email.id_for_label }}"
+                           type="{{ form.email.widget_type }}"
+                           placeholder="Your Email"
+                    />
+                    {% if form.email.errors %}
+                        {% for error in form.email.errors %}
+                            <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-sm font-bold mb-2" for="{{ form.address.id_for_label }}">
+                        Address
+                    </label>
+                    <input class="shadow appearance-none border border-gray-500 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                           name="{{ form.address.name }}"
+                           id="{{ form.address.id_for_label }}"
+                           type="{{ form.address.widget_type }}"
+                           placeholder="Your Address"
+                    />
+                    {% if form.address.errors %}
+                        {% for error in form.address.errors %}
+                            <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-sm font-bold mb-2" for="{{ form.phone.id_for_label }}">
+                        Phone no
+                    </label>
+                    <input class="shadow appearance-none border border-gray-500 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                           name="{{ form.phone.name }}"
+                           id="{{ form.phone.id_for_label }}"
+                           type="{{ form.phone.widget_type }}"
+                           placeholder="Phone Number"
+                    />
+                    {% if form.phone.errors %}
+                        {% for error in form.phone.errors %}
+                            <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-sm font-bold mb-2" for="{{ form.message.id_for_label }}">
+                        Your Message
+                    </label>
+                    <textarea rows="5" class="shadow appearance-none border border-gray-500 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                           name="{{ form.message.name }}"
+                           id="{{ form.message.id_for_label }}"
+                           type="{{ form.message.widget_type }}"
+                           placeholder="Your Message">
+                    </textarea>
+                    {% if form.message.errors %}
+                        {% for error in form.message.errors %}
+                            <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                
+
+                <div class="flex items-center justify-center w-full">
+                    <button class="w-2/3 md:w-1/2 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"  
+                    style="background-color:#164863; color: #DDF2FD;"
+                    onmouseover="this.style.backgroundColor='#DDF2FD'; this.style.color='#164863';"
+                    onmouseout="this.style.backgroundColor='#164863'; this.style.color='#DDF2FD';"
+                    type="submit">
+                        Send Message
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

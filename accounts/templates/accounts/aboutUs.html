@@ -1,0 +1,35 @@
+{% extends 'base.html' %} {% load static %} {% block body %}
+<br />
+<div class="flex flex-wrap items-center overflow-hidden " style="color: #164863;">
+  <div class="w-full md:w-1/2">
+    <img
+      class="about-image w-full p-16 m-4 mx-5"
+      src="{% static 'aboutUs.png' %}"
+      alt="image"
+    />
+  </div>
+  <div class="w-full md:w-1/2">
+    <h1 class="text-3xl font-bold my-4 mx-16">
+      Explore the World of <br /> Knowledge at Your Fingertips
+    </h1>
+
+    <p class="mb-4 mx-16 about-content">
+      We are committed to offering you access to a diverse range of books and resources, enriching your journey through the realm of literature and knowledge. Our library strives to empower individuals and communities by providing a welcoming space for learning and exploration.
+    </p>
+
+    <p class="mb-4 mx-16 about-content">
+    Our library is more than just a collection of books; it's a hub of discovery and community. Whether you're a lifelong reader or just beginning your journey into literature, our doors are open to you. From classic novels to cutting-edge research, we offer something for everyone.
+    </p>
+    <button
+      class="mx-16 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+      style="background-color:#164863; color: #DDF2FD;"
+      onmouseover="this.style.backgroundColor='#DDF2FD'; this.style.color='#164863';"
+      onmouseout="this.style.backgroundColor='#164863'; this.style.color='#DDF2FD';"
+    >
+      <a href="{% url 'home'%}">Explore More</a>
+    </button>
+  </div>
+</div>
+
+
+{% endblock %}

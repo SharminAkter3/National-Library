@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<div class="p-3">
+  <div class="flex flex-between w-full py-10 px-20 my-4">
+    <div class="w-full md:w-1/2">
+      <img
+        src="{{ book.image.url }}"
+        class="w-full h-auto"
+        alt="image"
+        style="height: 600px; width: 500px"
+      />
+    </div>
+    <div class="w-full md:w-1/2">
+      <div class="p-2 -mx-10 mr-16 rounded">
+        <h5 class="text-xl font-bold mt-2">
+          <a href="#" class="" style="color: #164863;">{{ book.name }}</a>
+        </h5>
+        <p class='text-xl' style='color: #cc3300'><b>Price:</b> {{ book.price }}Tk</p>
+        <p style="color: #164863;"><b>Department :</b> {{ book.category }}</p>
+        <p style="color: #164863;">{{ book.description }}</p>
+        
+        {% if request.user.is_authenticated %}
+          {% if not price_submitted %}
+            <a
+              href="{% url 'borrow_book' book.id %}"
+              id="borrow-now-button"
+              class="mt-3 font-bold py-3 py-2 px-4 rounded focus:outline-none focus:shadow-outline inline-block"
+              style="background-color:#164863; color: #DDF2FD;"
+              onmouseover="this.style.backgroundColor='#9BBEC8'; this.style.color='#164863';"
+              onmouseout="this.style.backgroundColor='#164863'; this.style.color='#DDF2FD';"
+            >
+              Borrow Now
+            </a>
+          {% endif %}
+        {% endif %}
+        
+        {% if price_submitted %}
+          {% if book.pdf %}
+            <a href="{{ book.pdf.url }}" download
+              id="download-pdf-button"
+              class="mt-3 font-bold py-3 py-2 px-4 rounded focus:outline-none focus:shadow-outline inline-block"
+              style="background-color:#427D9D; color: #DDF2FD;"
+              onmouseover="this.style.backgroundColor='#9BBEC8'; this.style.color='#164863';"
+              onmouseout="this.style.backgroundColor='#427D9D'; this.style.color='#DDF2FD';"
+            >
+              Download PDF
+            </a>
+          {% else %}
+            <p>No PDF available</p>
+          {% endif %}
+        {% endif %}
+  
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="m-2 p-4" style="background-color: #9BBEC8;">
+  <h5 class="p-3 text-xl font-bold" style="color: #164863;">
+    Total Review: {{ reviews | length }}
+  </h5>
+  {% for review in reviews %}
+  <div class="border m-2 p-4" style="color: #164863;">
+    <p><b>{{ review.name }} </b> {{ review.created_on }}</p>
+    <p>{{ review.body }}</p>
+  </div>
+  {% endfor %}
+</div>
+
+{% if request.user.is_authenticated %}
+<div class="m-2" style="color: #164863; background-color: #9BBEC8;">
+  <div class="p-4">
+    <form action="" method="post" class="p-2 m-5">
+      <h3 class="text-3xl my-2 font-bold">Add Review</h3>
+      {% csrf_token %} {{ review_form }}
+
+      <button
+        type="submit"
+        class="mt-3 font-bold py-3 py-2 px-4 rounded focus:outline-none focus:shadow-outline inline-block"
+            style="background-color:#164863; color: #DDF2FD;"
+            onmouseover="this.style.backgroundColor='#9BBEC8'; this.style.color='#164863';"
+            onmouseout="this.style.backgroundColor='#164863'; this.style.color='#DDF2FD';"
+      >
+        Review
+      </button>
+    </form>
+  </div>
+</div>
+{% endif %}
+{% endblock %}
